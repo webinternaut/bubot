@@ -90,13 +90,34 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
       </Menu.Item>
     </Menu>
   );
+
+  // const auth = useAuth()  
+  // const { currentUser } = initialState  
+
   return (
+
     <HeaderDropdown overlay={menuHeaderDropdown}>
-      <span className={`${styles.action} ${styles.account}`}>
-        <Avatar size="small" className={styles.avatar} src={currentUser.avatar} alt="avatar" />
-        <span className={`${styles.name} anticon`}>{currentUser.name}</span>
-      </span>
-    </HeaderDropdown>
+    <span className={`${styles.action} ${styles.account}`}>
+        <Avatar
+            size="small"
+            
+            // style={{
+            //     background: backgroundColor,
+            //     color: foregroundColor
+            // }}
+className={styles. avatar}
+            alt="avatar">
+            ["User.Read"]
+        </Avatar>
+        <span className={`${styles.name} anticon`}>["User.Read"] </span>
+    </span>
+</HeaderDropdown>
+    // <HeaderDropdown overlay={menuHeaderDropdown}>
+    //   <span className={`${styles.action} ${styles.account}`}>
+    //     <Avatar size="small" className={styles.avatar} src={currentUser.avatar} alt="avatar" />
+    //     <span className={`${styles.name} anticon`}>{currentUser.name}</span>
+    //   </span>
+    // </HeaderDropdown>
   );
 };
 
