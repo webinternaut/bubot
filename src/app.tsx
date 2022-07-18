@@ -9,6 +9,7 @@ import { currentUser as queryCurrentUser } from './services/ant-design-pro/api';
 import { BookOutlined, LinkOutlined } from '@ant-design/icons';
 import defaultSettings from '../config/defaultSettings';
 import request from 'umi-request';
+import Cookies from 'js-cookie';
 
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
@@ -22,7 +23,7 @@ export const initialStateConfig = {
 /******* Getting Token Infgormation */
 
 request.interceptors.request.use((url, options) => {
-  let token = localStorage.getItem('access_token');
+  let token = Cookies.get('access_token') /*localStorage.getItem('access_token'); */
   if (null === token) {
     token = '';
   }
