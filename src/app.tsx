@@ -23,7 +23,7 @@ export const initialStateConfig = {
 /******* Getting Token Infgormation */
 
 request.interceptors.request.use((url, options) => {
-  let token = Cookies.get('access_token') /*localStorage.getItem('access_token'); */
+  let token = Cookies.get('mod_auth_openidc_session') /*localStorage.getItem('access_token'); */
   if (null === token) {
     token = '';
   }
