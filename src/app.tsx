@@ -8,6 +8,7 @@ import Footer from '@/components/Footer';
 import { currentUser as queryCurrentUser } from './services/ant-design-pro/api';
 import { BookOutlined, LinkOutlined } from '@ant-design/icons';
 import defaultSettings from '../config/defaultSettings';
+import request from 'umi-request';
 
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
@@ -16,6 +17,21 @@ const loginPath = '/user/login';
 export const initialStateConfig = {
   loading: <PageLoading />,
 };
+
+
+/******* Getting Token Infgormation */
+
+request.interceptors.request.use((url, options) => {
+  let token = localStorage.getItem('access_token');
+  if (null === token) {
+    token = '';
+  }
+  const authHeader = { Authorization: `Bearer ${token}` };
+  return {
+    url: url,
+    options: { ...options, interceptors: true, headers: authHeader },
+  };
+});
 
 /**
  * @see  https://umijs.org/zh-CN/plugins/plugin-initial-state
