@@ -9,7 +9,9 @@ import { currentUser as queryCurrentUser } from './services/ant-design-pro/api';
 import { BookOutlined, LinkOutlined } from '@ant-design/icons';
 import defaultSettings from '../config/defaultSettings';
 import request from 'umi-request';
-import Cookies from 'js-cookie';
+import { PublicClientApplication } from "@azure/msal-browser";
+import { MsalProvider } from "@azure/msal-react";
+import { msalConfig } from "./authConfig";
 
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
@@ -18,21 +20,9 @@ const loginPath = '/user/login';
 export const initialStateConfig = {
   loading: <PageLoading />,
 };
-
+const msalInstance = new PublicClientApplication(msalConfig);
 
 /******* Getting Token Infgormation */
-
-request.interceptors.request.use((url, options) => {
-  let token = Cookies.get('mod_auth_openidc_session') /*localStorage.getItem('access_token'); */
-  if (null === token) {
-    token = '';
-  }
-  const authHeader = { Authorization: `Bearer ${token}` };
-  return {
-    url: url,
-    options: { ...options, interceptors: true, headers: authHeader },
-  };
-});
 
 /**
  * @see  https://umijs.org/zh-CN/plugins/plugin-initial-state
@@ -103,6 +93,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
       // if (initialState?.loading) return <PageLoading />;
       return (
         <>
+        <MsalProvider instance={msalInstance}>
           {children}
           {!props.location?.pathname?.includes('/login') && (
             <SettingDrawer
@@ -117,6 +108,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
               }}
             />
           )}
+          </MsalProvider>
         </>
       );
     },

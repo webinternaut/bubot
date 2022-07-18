@@ -37,9 +37,15 @@
   "lint-staged": {
     "**/*.less": "stylelint --syntax less",
     "**/*.{js,jsx,ts,tsx}": "npm run lint-staged:js",
-    "**/*.{js,jsx,tsx,ts,less,md,json}": ["prettier --write"]
+    "**/*.{js,jsx,tsx,ts,less,md,json}": [
+      "prettier --write"
+    ]
   },
-  "browserslist": ["> 1%", "last 2 versions", "not ie <= 10"],
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 10"
+  ],
   "dependencies": {
     "@ant-design/charts": "^0.9.4",
     "@ant-design/icons": "^4.7.0",
@@ -52,6 +58,8 @@
     "@antv/l7": "^2.3.7",
     "@antv/l7-maps": "^2.3.7",
     "@antv/l7-react": "^2.1.9",
+    "@azure/msal-browser": "^2.27.0",
+    "@azure/msal-react": "^1.4.3",
     "@umijs/route-utils": "^2.0.0",
     "ahooks": "^2.0.0",
     "antd": "^4.19.0",
@@ -109,5 +117,7 @@
     "typescript": "^4.5.0",
     "umi-serve": "^1.9.10"
   },
-  "engines": { "node": ">=12.0.0" }
+  "engines": {
+    "node": ">=12.0.0"
+  }
 }
